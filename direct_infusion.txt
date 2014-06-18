@@ -1,0 +1,9 @@
+Signal processing with xcms
+
+There is a full tutorial from the makers of XCMS here: http://www.bioconductor.org/packages/release/bioc/vignettes/xcms/inst/doc/xcmsPreprocess.pdf .  XCMS is an R package that enables the visualization and basic processing of chromatographic and mass spectrometry data files. It requires that the data be converted to an open format such as mzXML prior to attempting to load in the data.
+
+Proteowizard needs to be installed and can be found here: http://proteowizard.sourceforge.net/downloads.shtml
+
+First we are going to look at direct infusion orbitrap mass spectrometry data. If you have a couple .RAW Xcalibur files you can use those. Use proteowizard to convert them to mzXML without any additional peak picking or processing available with proteowizard. There are a couple of mzXML files available for download from my google drive account here: https://drive.google.com/folderview?id=0B06AQDbcyIg8Q2ZFYm1RNmhnMUE&usp=sharing
+
+
