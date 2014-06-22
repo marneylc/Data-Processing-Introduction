@@ -21,7 +21,7 @@ Now take a look at the contents of the folder from within R.
 list.files(path)
 ```
 
-list.files() is our first encounter with a function. It is a built in function that comes with the installation of R. Functions take argument, in our case the variable path, and return values. There is some internal process that turns the path that you give the function list.files() into a list of file names in that folder.
+list.files() and setwd() are called functions. Both setwd() and list.files() are built in functions that come with the installation of R. Functions take argument, in our case the variable path, and return values. There is some internal process that turns the path that you give the function list.files() into a list of file names in that folder. In the future you can write your own functions to take arguments, like data files, and do some stuff to them and spit out something informative and useful.
 
 Another extremely useful function in R is the help() function, which pulls up the help file for any other function or object. Try it,
 
