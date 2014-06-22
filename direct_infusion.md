@@ -1,6 +1,6 @@
 Signal processing with xcms
 
-There is a full tutorial from the makers of XCMS here: http://www.bioconductor.org/packages/release/bioc/vignettes/xcms/inst/doc/xcmsPreprocess.pdf .  XCMS is an R package that enables the visualization and basic processing of chromatographic and mass spectrometry data files. It requires that the data be converted to an open format such as mzXML prior to attempting to load in the data.
+There is a full tutorial from the makers of XCMS here: http://www.bioconductor.org/packages/release/bioc/vignettes/xcms/inst/doc/xcmsPreprocess.pdf .  XCMS is an R package that enables the visualization and some intense processing of chromatographic and mass spectrometry data files. It also contains some fantastic tools for some basic processing that can be built into custom tools. It requires that the data be converted to an open format such as mzXML prior to attempting to load in the data.
 
 Proteowizard needs to be installed and can be found here: http://proteowizard.sourceforge.net/downloads.shtml
 
