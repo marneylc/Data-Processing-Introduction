@@ -100,12 +100,13 @@ min(spectrum[,1])
 min(spectrum2[,1])
 
 max(spectrum[,1])
-min(spectrum2[,1])
+max(spectrum2[,1])
 
 diff <- spectrum[,2] - spectrum2[,2]
 ```
 
-What error message do you get? Why is that? How could we solve that?
+What error message do you get? Why is that? How could we solve that? What did the [,1] mean for spectrum[,1]?
+
 See if you can figure out how to take the difference between these two spectral files.
 
 This is one of the biggest processing problems in mass spectrometry and chromatography--alignment.
