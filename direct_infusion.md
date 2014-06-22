@@ -37,65 +37,65 @@ or
 
 Now we are going to pass a little extra information in case there are other files in the folder. We will define the variable 'files' to be a list of file names that we can use to load in specific files, or later loop through to process a batch of files easily.
 
-'''
+``` R
 files = list.files(path, pattern = '.mzXML')
-'''
+```
 
 I think you can imagine what the pattern definition does. In code-speak pattern is an argument passed to the function list.files. Lots of functions have optional arguments that can be very useful. Be sure to read the documentation if you ever want a function to do something extra, there could be a solution in the optional arguments. Find the options with ?list.files or help(list.files).
 
 We are going to use the package xcms to read and parse the information in the mzXML files. So first we import the package using the library() fucntion. If you need to install it, you can find the source code at bioconductor with directions on how to install it for your OS.
 
-'''R
+``` R
 library(xcms)
-'''
+```
 
 The simplest thing to do is to plot the TIC from the mzXML file, which will help us decide later which time range to use to create an average spectrum to process later. First we have to create an xcmsRaw-object. An object is an entity in coding that contains both data and methods. Don't worry if this doesn't quite make sense, im not sure it even does to the people that came up with object oriented programming. But, it does end up being very usefull. So we are going to store the complete spectral data into an xcmsRaw-object, plus we can use the encoded methods in that object to easily plot the TIC. There are also a lot of other things we can do with xcms. You can read about them again with ?xcmsRaw-object
 
-'''R
+``` R
 data <- xcmsRaw(files[1])
 plotTIC(data)
-'''
+```
 
 That's a pretty handy method for quickly seeing our infusion data. We can now pick our retention time window that we would want to take an average spectrum from, or if this contained a chromatographic separation we could first see some of the data with this.
 
 Now we are going to define a spectrum variable that will hold an averaged spectrum from the mzXML file. We are again going to use a method of the xcmsRaw object that we defined as the variable data. The method we will use is getSpec().
 
-'''R
+``` R
 spectrum <- getSpec(data, rtrange=c(0,60), mzrange=c(200,1800))
-'''
+```
 
 What does c(0,60) and c(200,1800) mean? How could you find out? Maybe try ?c
 
 If you want to take a peak at the spectrum variable and what it contains you can type in either
 
-'''R
+``` R
 View(spectrum)
-'''
+```
 or
-'''R
+``` R
 spectrum
-'''
+```
 
 And watch the numbers fly!
 
 Let's look at it as we are used to, as a bar plot.
 
-'''R
+``` R
 plot(spectrum, type='h', lwd=1)
-'''
+```
 
 How could we zoom in?
 
 Next we will do one of the simplest processing methods. Lets see what the difference between two samples is. First we will make another xcmsRaw-object for another file, define the variable spectrum2 to be the second spectrum, and then take the difference between the two samples.
 
-'''
+``` R
 data2 <- xcmsRaw(files[2])
 spectrum2 <- getSpec(data2, rtrange=c(0,60), mzrange=c(200,1800))
-'''
+```
 
 Now we have a problem. Look at the two spectral data with View() and take a look at the output from the following code.
 
-'''
+``` R
 min(spectrum[,1])
 min(spectrum2[,1])
 
@@ -103,7 +103,7 @@ max(spectrum[,1])
 min(spectrum2[,1])
 
 diff <- spectrum[,2] - spectrum2[,2]
-'''
+```
 
 What error message do you get? Why is that? How could we solve that?
 See if you can figure out how to take the difference between these two spectral files.
@@ -111,9 +111,9 @@ See if you can figure out how to take the difference between these two spectral 
 This is one of the biggest processing problems in mass spectrometry and chromatography--alignment.
 
 Hint:
-'''R
+``` R
 subset <- spectrum[1:20,]
-'''
+```
 
 Don't be distracted by the NA values, that just means the mass spectrometer didn't detect any signal for those m/z values.
 
