@@ -21,7 +21,7 @@ Now take a look at the contents of the folder from within R.
 list.files(path)
 ```
 
-list.files() and setwd() are called functions. Both setwd() and list.files() are built in functions that come with the installation of R. Functions take argument, in our case the variable path, and return values. There is some internal process that turns the path that you give the function list.files() into a list of file names in that folder. In the future you can write your own functions to take arguments, like data files, and do some stuff to them and spit out something informative and useful.
+list.files() and setwd() are called functions. Both setwd() and list.files() are built in functions that come with the installation of R. Functions take arguments, in our case the variable path, and return values. There is some internal process that turns the path that you give the function list.files() into a list of file names in that folder. In the future you can write your own functions to take arguments, like data files, and do some stuff to them and spit out something informative and useful.
 
 Another extremely useful function in R is the help() function, which pulls up the help file for any other function or object. Try it,
 
@@ -35,28 +35,28 @@ or
 ?list.files
 ```
 
-Now we are going to pass a little extra information in case there are other files in the folder. We will define the variable 'files' to be a list of filename that we can use to load in specific files, or later loop through to process a batch of files easily.
+Now we are going to pass a little extra information in case there are other files in the folder. We will define the variable 'files' to be a list of file names that we can use to load in specific files, or later loop through to process a batch of files easily.
 
 '''
-file = list.files(path, pattern = '.mzXML')
+files = list.files(path, pattern = '.mzXML')
 '''
 
-I think you can imagine what the pattern definition does. In code-speak pattern is an argument passed to the function list.files. Lots of functions have optional arguments that can be very useful. Be sure to read the documentation if you ever want a function to do something a little more, there could be a solution in the optional arguments. Find the options with ?list.files or help(list.files).
+I think you can imagine what the pattern definition does. In code-speak pattern is an argument passed to the function list.files. Lots of functions have optional arguments that can be very useful. Be sure to read the documentation if you ever want a function to do something extra, there could be a solution in the optional arguments. Find the options with ?list.files or help(list.files).
 
-We are going to use the package xcms to read and parse the information in the mzXML files. So first we import the package using the library() fucntion. If you need to install it, you can find the source code at bioconductor with direction on how to install it for your OS.
+We are going to use the package xcms to read and parse the information in the mzXML files. So first we import the package using the library() fucntion. If you need to install it, you can find the source code at bioconductor with directions on how to install it for your OS.
 
 '''R
 library(xcms)
 '''
 
-The simplest thing to do is to plot the TIC from the mzXML file, which will help us decide later which time range to use to create an average spectrum to process later. First we have to create an xcmsRaw-object. An object is an entity in coding that contains both data and methods. So we are going to store the complete spectral data into an xcmsRaw-object, plus we can use the encoded methods in that object to easily plot the TIC. There are also a lot of other things we can do with xcms. You can read about them again with ?xcmsRaw-object
+The simplest thing to do is to plot the TIC from the mzXML file, which will help us decide later which time range to use to create an average spectrum to process later. First we have to create an xcmsRaw-object. An object is an entity in coding that contains both data and methods. Don't worry if this doesn't quite make sense, im not sure it even does to the people that came up with object oriented programming. But, it does end up being very usefull. So we are going to store the complete spectral data into an xcmsRaw-object, plus we can use the encoded methods in that object to easily plot the TIC. There are also a lot of other things we can do with xcms. You can read about them again with ?xcmsRaw-object
 
 '''R
 data <- xcmsRaw(files[1])
 plotTIC(data)
 '''
 
-That's a pretty handy method for quickly seeing our infusion data. We can now pick our retentiontime window to get spectra from.
+That's a pretty handy method for quickly seeing our infusion data. We can now pick our retention time window that we would want to take an average spectrum from, or if this contained a chromatographic separation we could first see some of the data with this.
 
 Now we are going to define a spectrum variable that will hold an averaged spectrum from the mzXML file. We are again going to use a method of the xcmsRaw object that we defined as the variable data. The method we will use is getSpec().
 
@@ -66,7 +66,6 @@ spectrum <- getSpec(data, rtrange=c(0,60), mzrange=c(200,1800))
 
 What does c(0,60) and c(200,1800) mean? How could you find out? Maybe try ?c
 
-'''
 If you want to take a peak at the spectrum variable and what it contains you can type in either
 
 '''R
@@ -109,11 +108,16 @@ diff <- spectrum[,2] - spectrum2[,2]
 What error message do you get? Why is that? How could we solve that?
 See if you can figure out how to take the difference between these two spectral files.
 
+This is one of the biggest processing problems in mass spectrometry and chromatography--alignment.
+
 Hint:
 '''R
 subset <- spectrum[1:20,]
 '''
 
 Don't be distracted by the NA values, that just means the mass spectrometer didn't detect any signal for those m/z values.
+
+----------------------------------------------
+After you have thought about that for a while, maybe start thinking about this.
 
 Think about how you would go about importing in MRM chromatographic data. Take a look at the xcms documentation online and see if you can figure it out. This is my lazy way of not writing a tutorial on this as of yet :)
