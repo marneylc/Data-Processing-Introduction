@@ -109,7 +109,7 @@ What error message do you get? Why is that? How could we solve that? What did th
 
 See if you can figure out how to take the difference between these two spectral files.
 
-This is one of the biggest processing problems in mass spectrometry and chromatography--alignment.
+This is one of the biggest processing problems in mass spectrometry and chromatography: alignment.
 
 Hint:
 ``` R
